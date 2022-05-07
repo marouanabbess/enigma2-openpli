@@ -521,7 +521,7 @@ class HdmiCec:
 		log_path = config.hdmicec.log_path.value
 		path = os.path.join(log_path, LOGFILE)
 		if pathExists(log_path):
-			fp = open(path, 'a')
+			fp = file(path, 'a')
 			fp.write(output)
 			fp.close()
 

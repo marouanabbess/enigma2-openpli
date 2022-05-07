@@ -4,8 +4,7 @@ import os
 import time
 import re
 from Tools.HardwareInfo import HardwareInfo
-from boxbranding import getBoxType
-boxtype = getBoxType()
+
 
 def getFlashMemory(folder='/'):
 	try:
@@ -179,10 +178,7 @@ def getDriverInstalledDate():
 		from glob import glob
 		try:
 			with open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") as fp:
-				if boxtype in ("dm800", "dm8000"):
-					driver = [x.split("-")[-2:-1][0][-9:] for x in fp if x.startswith("Version:")][0]
-				else:
-					driver = [x.split("-")[-2:-1][0][-8:] for x in fp if x.startswith("Version:")][0]
+				driver = [x.split("-")[-2:-1][0][-8:] for x in fp if x.startswith("Version:")][0]
 				return "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
 		except:
 			try:

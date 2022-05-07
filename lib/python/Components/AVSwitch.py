@@ -2,8 +2,9 @@ from config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEna
 from enigma import eAVSwitch, eDVBVolumecontrol, getDesktop
 from SystemInfo import SystemInfo
 from Tools.Directories import fileExists
-import os
 from boxbranding import getBoxType
+import os
+
 boxtype = getBoxType()
 
 class AVSwitch:
