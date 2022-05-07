@@ -3622,6 +3622,7 @@ class InfoBarPowersaver:
 			print "[InfoBarPowersaver] goto standby"
 			self.session.open(Screens.Standby.Standby)
 
+
 class InfoBarHDMI:
 	def HDMIIn(self):
 		slist = self.servicelist
@@ -3641,37 +3642,3 @@ class InfoBarHDMI:
 				self.session.nav.playService(slist.servicelist.getCurrent())
 			else:
 				self.session.nav.playService(self.cur_service)
-
-class InfoBarHDMI2:
-	def __init__(self):
-		self.hdmi_enabled_input = False
-		if SystemInfo["DMHDMI"]:
-			if not self.hdmi_enabled_input:
-				self.addExtension((self.getHDMIInputScreen, self.HDMIInput, lambda: True), "green")
-
-	def getHDMIInputScreen(self):
-		if not self.hdmi_enabled_input:
-			return _("Turn on HDMI-IN mode")
-		else:
-			return _("Turn off HDMI-IN mode")
-
-	def HDMIInput(self):
-			f = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "r")
-			check = f.read()
-			f.close()
-			if check.startswith("off"):
-				f = open("/proc/stb/audio/hdmi_rx_monitor", "w")
-				f.write("on")
-				f.close()
-				f = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "w")
-				f.write("on")
-				f.close()
-				self.hdmi_enabled_input = True
-			else:
-				f = open("/proc/stb/audio/hdmi_rx_monitor", "w")
-				f.write("off")
-				f.close()
-				f = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "w")
-				f.write("off")
-				f.close()
-				self.hdmi_enabled_input = False
