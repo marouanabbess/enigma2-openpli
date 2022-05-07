@@ -1380,7 +1380,7 @@ class OPKGSource(Screen):
 		text = ""
 		if self.configfile:
 			try:
-				fp = open(configfile, 'r')
+				fp = file(configfile, 'r')
 				sources = fp.readlines()
 				if sources:
 					text = sources[0]
@@ -1432,7 +1432,7 @@ class OPKGSource(Screen):
 	def go(self):
 		text = self["text"].getText()
 		if text:
-			fp = open(self.configfile, 'w')
+			fp = file(self.configfile, 'w')
 			fp.write(text)
 			fp.write("\n")
 			fp.close()
